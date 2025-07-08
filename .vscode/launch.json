@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [        
+        {
+            "name": "Electron: Main Process",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.js", // Path to your main process file
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+            "windows": {
+                "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+            },
+            "args": [".", "--remote-debugging-port=9222"], // Enables renderer debugging
+            "cwd": "${workspaceFolder}",
+            "outputCapture": "std",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "preLaunchTask": "Start Vite"
+        },
+        {
+            "name": "Electron: Renderer Process",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222, // Must match the --remote-debugging-port
+            "webRoot": "${workspaceFolder}",
+            "trace": true
+        }
+    ]
+}
+  

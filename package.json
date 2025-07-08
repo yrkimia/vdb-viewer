@@ -1,22 +1,43 @@
 {
-  "name": "vdb-viewer",
-  "private": true,
-  "version": "0.0.0",
+  "name": "VDBViewer",
+  "version": "0.1.0",
   "main": "main.js",
   "type": "module",
+  "description": "VPIX VDBViewer",
+  "author": "VPIXMedical",
   "scripts": {
     "dev": "vite",
     "start": "cross-env NODE_ENV=development electron .",
     "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "package": "electron-builder --win --x64",
+    "dev-and-start": "concurrently \"npm run dev\" \"npm start\""
+  },
+  "build": {
+    "appId": "com.vpixmedical.vdbviewer",
+    "productName": "VDBViewer",
+    "directories": {
+        "output": "release"
+    },
+    "files": [
+        "dist/**/*",
+        "main.js",
+        "preload.cjs",
+        "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icons/icon.ico"
+    },
+    "nsis": {
+        "oneClick": true,
+        "allowToChangeInstallationDirectory": false,
+        "createDesktopShortcut": true
+    }
   },
   "dependencies": {
     "chart.js": "^4.5.0",
     "concurrently": "^9.2.0",
     "cross-env": "^7.0.3",
-    "electron": "^37.2.0",
-    "electron-builder": "^26.0.12",
     "fs": "^0.0.1-security",
     "node-notifier": "^10.0.1",
     "path": "^0.12.7",
@@ -30,6 +51,8 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.5.2",
+    "electron": "^37.2.0",
+    "electron-builder": "^26.0.12",
     "eslint": "^9.29.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
